@@ -102,4 +102,4 @@ const updateProfile =async(req,res)=>{
   }
 }
 
-export { register,login,showUsers,deleteUser,updateUser,profile };
+export { register,login,showUsers,deleteUser,updateUser,profile,updateProfile };
