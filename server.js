@@ -2,11 +2,13 @@ import express from "express";
 import mongoose from "mongoose";
 import Router from "./routes/userRoute.js";
 import dotenv from "dotenv";
+import cors from "cors";
 dotenv.config();
 
 import { authenticate, authorize } from "./middlewares/auth.js";
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 const dbuser=encodeURIComponent(process.env.DBUSER) 
 const dbpass=encodeURIComponent(process.env.DBPASS)
