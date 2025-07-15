@@ -35,10 +35,28 @@ const updateUser = async (req, res) => {
 };
 const showUsers = async (req, res) => {
   try {
-    const result = await userModel.find();
-    res.status(200).json(result);
-  } catch (err) {}
+    const { page = 1, limit = 1, search = "" } = req.query;
+    const skip = (page - 1) * limit;
+
+    const count = await userModel.countDocuments({
+      firstname: { $regex: search, $options: "i" },
+    });
+
+    const total = Math.ceil(count / limit);
+
+    const users = await userModel
+      .find({ firstname: { $regex: search, $options: "i" } })
+      .skip(skip)
+      .limit(parseInt(limit))
+      .sort({ updatedAt: -1 });  // Ensure your schema has updatedAt field.
+
+    res.status(200).json({ users, total });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Something went wrong" });
+  }
 };
+
 
 const login = async (req, res) => {
   try {
@@ -83,6 +101,18 @@ const register = async (req, res) => {
     res.status(500).json({ message: "Something went wrong" });
   }
 };
+const addUser = async (req, res) => {
+  try {
+    const body = req.body;
+    const hashedpwd = await bcrypt.hash(body.password, 10);
+    body.password = hashedpwd;
+    const result = await userModel.create(body);
+    res.status(200).json(result);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Something went wrong" });
+  }
+};
 
 const updateProfile =async(req,res)=>{
   try{
@@ -102,4 +132,4 @@ const updateProfile =async(req,res)=>{
   }
 }
 
-export { register,login,showUsers,deleteUser,updateUser,profile,updateProfile };
+export { register,login,showUsers,deleteUser,updateUser,profile,updateProfile , addUser };
