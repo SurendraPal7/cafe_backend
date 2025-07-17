@@ -2,11 +2,12 @@ import express from "express";
 import { addProduct,showProducts,deleteProduct,updateProduct,getProduct,displayProducts } from "../controllers/productController.js";
 
 const Router = express.Router();
+//user
+Router.get("/all", displayProducts);
 
 
 //admin routes
 Router.get("/", showProducts);
-Router.get("/all", displayProducts);
 Router.post("/addPro", addProduct);
 Router.get("/:id", getProduct);
 Router.patch("/:id", updateProduct);
