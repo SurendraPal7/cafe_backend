@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 const SECRET = "something";
+
 const authenticate = (req, res, next) => {
   try {
     let token = req.headers.authorization;
@@ -22,4 +23,4 @@ const authorize = (role) => {
   };
 };
 
-export { authenticate, authorize};
+export {authenticate,authorize}
