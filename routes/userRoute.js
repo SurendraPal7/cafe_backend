@@ -9,7 +9,10 @@ import {
   deleteUser,
   showUsers,
   updateProfile,
+    getUser,
+
   addUser
+
 } from "../controllers/userController.js";
 /*
 Router.post("/register", register);
