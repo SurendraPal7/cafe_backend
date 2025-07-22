@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import {ObjectId} from "mongoose"
 import jwt from "jsonwebtoken";
 const SECRET = "something";
+
 const profile = async (req, res) => {
   try {
     const id = req.params.id;
