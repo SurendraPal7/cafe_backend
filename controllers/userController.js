@@ -65,7 +65,7 @@ const login = async (req, res) => {
         };
         const token = jwt.sign(userObj, SECRET, { expiresIn: "1h" });
         res.status(200).json({ ...userObj, token });
-      } else {
+      } else {             
         res.status(400).json({ message: "Invalid Password" });
       }
     } else {

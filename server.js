@@ -4,7 +4,7 @@ import userRouter from "./routes/userRoute.js";
 import productRouter from "./routes/productRoute.js";
 import orderRouter from "./routes/orderRoute.js"
 import dotenv from "dotenv";
-import cors from "cors";
+import cors from "cors"; 
 dotenv.config();
 
 import { authenticate, authorize } from "./middlewares/auth.js";
